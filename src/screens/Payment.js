@@ -37,9 +37,9 @@ function Payment() {
 
   const onNext = (e) => {
     console.log('next')
-    if (e.target.value.length == 0) {
-      setInvalid()
-    }
+    // if (e.target.value.length == 0) {
+    //   setInvalid()
+    // }
   }
 
   return (
