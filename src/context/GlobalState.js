@@ -7,6 +7,7 @@ const initialState = {
   dur: 12,
   amount: '5',
   upfrontPayment: 'NO',
+  email: '',
   cardNum: '',
   cardDate: '',
   cardCode: '',
@@ -42,6 +43,12 @@ export const GlobalProvider = ({children}) => {
     })
   }
 
+  const updateEmail = (email) => {
+    dispatch({
+      type: 'UPDATE_EMAIL',
+      payload: email,
+    })
+  }
   const updateCardNum = (cardNum) => {
     dispatch({
       type: 'UPDATE_CARD_NUM',
@@ -86,6 +93,7 @@ export const GlobalProvider = ({children}) => {
         dur: state.dur,
         amount: state.amount,
         upfrontPayment: state.upfrontPayment,
+        email: state.email,
         cardNum: state.cardNum,
         cardDate: state.cardDate,
         cardCode: state.cardCode,
@@ -93,6 +101,7 @@ export const GlobalProvider = ({children}) => {
         updateDuration,
         updateAmount,
         updateUpfrontPayment,
+        updateEmail,
         updateCardNum,
         updateCardDate,
         updateCardCode,

@@ -1,4 +1,4 @@
-import React, {useEffect, useContext, useState} from 'react'
+import React, {useContext} from 'react'
 
 import {Col, Row, Form} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
@@ -9,6 +9,8 @@ import {GlobalContext} from '../context/GlobalState'
 
 function Payment() {
   const {
+    email,
+    updateEmail,
     cardNum,
     updateCardNum,
     cardDate,
@@ -21,10 +23,9 @@ function Payment() {
     price,
   } = useContext(GlobalContext)
 
-  const [invalid, setInvalid] = useState(false)
-
-  let disabledLink = invalid ? 'btn-secondary disabled-link' : 'btn-success'
-
+  const emailOnChange = (e) => {
+    updateEmail(e.target.value)
+  }
   const cardNumOnChange = (e) => {
     updateCardNum(e.target.value)
   }
@@ -33,13 +34,6 @@ function Payment() {
   }
   const cardCodeOnChange = (e) => {
     updateCardCode(e.target.value)
-  }
-
-  const onNext = (e) => {
-    console.log('next')
-    // if (e.target.value.length == 0) {
-    //   setInvalid()
-    // }
   }
 
   return (
@@ -53,57 +47,78 @@ function Payment() {
             {'->'} All fields are required {'<-'}{' '}
           </span>
         </p>
-        <Col md={4} className='justify-content-center'>
-          <Form.Group
-            onChange={cardNumOnChange}
-            className='mb-3'
-            controlId='formCardNum'
-          >
-            <Form.Label>Credit Card Number*</Form.Label>
-            <Form.Control
-              defaultValue={cardNum}
-              required
-              type='text'
-              placeholder='Enter number'
-            />
-            <Form.Text className='text-muted'>
-              We'll never share your card info with anyone else.
-            </Form.Text>
-          </Form.Group>
-        </Col>
+        <Row>
+          <Col md={4}></Col>
+          <Col md={4}>
+            <Form.Group
+              onChange={emailOnChange}
+              className='mb-3'
+              controlId='formEmail'
+            >
+              <Form.Label>Your Email*</Form.Label>
+              <Form.Control
+                defaultValue={email}
+                required
+                type='email'
+                placeholder='Enter email'
+              />
+            </Form.Group>
+          </Col>
+          <Col md={4}></Col>
+        </Row>
+        <Row>
+          <Col md={4} className='justify-content-center'>
+            <Form.Group
+              onChange={cardNumOnChange}
+              className='mb-3'
+              controlId='formCardNum'
+            >
+              <Form.Label>Credit Card Number*</Form.Label>
+              <Form.Control
+                defaultValue={cardNum}
+                required
+                type='text'
+                placeholder='Enter number'
+              />
+              <Form.Text className='text-muted'>
+                We'll never share your card info with anyone else.
+              </Form.Text>
+            </Form.Group>
+          </Col>
 
-        <Col md={4} className='justify-content-center'>
-          <Form.Group
-            onChange={cardDateOnChange}
-            className='mb-3'
-            controlId='formCardDate'
-          >
-            <Form.Label>Card Expiration Date*</Form.Label>
-            <Form.Control defaultValue={cardDate} required type='date' />
-            <Form.Text className='text-muted'>
-              Put in your card expiration date.
-            </Form.Text>
-          </Form.Group>
-        </Col>
+          <Col md={4} className='justify-content-center'>
+            <Form.Group
+              onChange={cardDateOnChange}
+              className='mb-3'
+              controlId='formCardDate'
+            >
+              <Form.Label>Card Expiration Date*</Form.Label>
+              <Form.Control defaultValue={cardDate} required type='date' />
+              <Form.Text className='text-muted'>
+                Put in your card expiration date.
+              </Form.Text>
+            </Form.Group>
+          </Col>
 
-        <Col className='mb-3 justify-content-center'>
-          <Form.Group
-            onChange={cardCodeOnChange}
-            className='mb-3'
-            controlId='formCardCode'
-          >
-            <Form.Label>Credit Card Security Code*</Form.Label>
-            <Form.Control
-              defaultValue={cardCode}
-              required
-              type='password'
-              placeholder='Code'
-            />
-            <Form.Text className='text-muted'>
-              All your information are confidential.
-            </Form.Text>
-          </Form.Group>
-        </Col>
+          <Col className='mb-3 justify-content-center'>
+            <Form.Group
+              onChange={cardCodeOnChange}
+              className='mb-3'
+              controlId='formCardCode'
+            >
+              <Form.Label>Credit Card Security Code*</Form.Label>
+              <Form.Control
+                defaultValue={cardCode}
+                required
+                type='password'
+                placeholder='Code'
+              />
+              <Form.Text className='text-muted'>
+                All your information are confidential.
+              </Form.Text>
+            </Form.Group>
+          </Col>
+        </Row>
       </Row>
       <Row>
         <Col md={6}>
@@ -116,9 +131,8 @@ function Payment() {
           </Link>
           <Link
             variant='primary'
-            className={`justify-content-center btn mx-2 ${disabledLink}`}
+            className='justify-content-center btn mx-2 btn-success'
             to='/summary'
-            onClick={onNext}
           >
             Next
           </Link>

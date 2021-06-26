@@ -15,6 +15,11 @@ const AppReducer = (state, action) => {
         ...state,
         upfrontPayment: action.payload,
       }
+    case 'UPDATE_EMAIL':
+      return {
+        ...state,
+        email: action.payload,
+      }
     case 'UPDATE_CARD_NUM':
       return {
         ...state,

@@ -1,4 +1,4 @@
-import React, {useState, useContext, useEffect} from 'react'
+import React, {useContext, useEffect} from 'react'
 import Steps from '../components/Steps'
 
 import {Link} from 'react-router-dom'
@@ -20,7 +20,7 @@ function Parameters() {
 
   useEffect(() => {
     updatePrice(dur, amount, upfrontPayment)
-  }, [dur, amount, upfrontPayment])
+  }, [updatePrice, dur, amount, upfrontPayment])
 
   const onChangeDur = (e) => {
     updateDuration(e.target.value)
