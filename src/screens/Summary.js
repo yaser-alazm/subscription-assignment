@@ -56,7 +56,7 @@ function Summary() {
 
   return (
     <>
-      <Steps stp3 />
+      <Steps stp3 data-testid='link-element' />
       <Jumbotron>
         <h3>Your Subscription Summary:</h3>
         <Row className='verticaly-centered'>

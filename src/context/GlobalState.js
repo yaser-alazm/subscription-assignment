@@ -11,7 +11,7 @@ const initialState = {
   cardNum: '',
   cardDate: '',
   cardCode: '',
-  price: 24,
+  price: '',
 }
 
 // Create Context
